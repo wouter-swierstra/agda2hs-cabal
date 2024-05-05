@@ -1,0 +1,54 @@
+cabal-version: 3.4
+               
+-- The name of the package.
+name:                agda2hs-cabal
+version:             0.1.0.0
+synopsis:            Example project using cabal to integrate agda2hs
+                     with other Haskell code
+-- The license under which the package is released.
+license:             BSD-2-Clause
+license-file:        LICENSE
+-- The package author(s).
+author:              Wouter Swierstra
+maintainer:          w.s.swierstra@uu.nl
+
+-- copyright:
+
+build-type:          Custom
+
+-- Extra doc files to be distributed with the package, such as a CHANGELOG or a README.
+extra-doc-files:     CHANGELOG.md
+extra-source-files:  src/Greeting.agda
+extra-tmp-files:     src/Greeting.agdai, src/Greeting.hs
+
+custom-setup
+  setup-depends:
+      base        >= 4.18 && < 5
+    , Cabal >= 3.0 && < 4
+    , process > 1.6
+    
+common warnings
+    ghc-options: -Wall 
+
+executable gloss-demo
+    -- Import common warning flags.
+    import:           warnings
+
+    -- .hs or .lhs file containing the Main module.
+    main-is:          Main.hs
+
+    -- Modules included in this executable, other than Main.
+    other-modules:    Greeting
+
+    -- LANGUAGE extensions used by modules in this package.
+    -- other-extensions:
+
+    -- Other library packages from which modules are imported.
+    build-depends:    base ^>=4.19.0.0
+                      , gloss >= 1.13
+
+    -- Directories containing source files.
+    hs-source-dirs:   src
+
+    -- Base language which the package is written in.
+    default-language: Haskell2010
